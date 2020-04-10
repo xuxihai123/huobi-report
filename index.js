@@ -12,7 +12,7 @@ function reportAnalysis(list) {
       selloutCurrency += temp.totalPrice;
     }
   });
-  return { buy: buyCurrency, sellout: selloutCurrency };
+  return { buy: buyCurrency, sellout: selloutCurrency, count: list.length };
 }
 
 function parseQuestionExcel(buffer) {
@@ -59,6 +59,7 @@ function parseQuestionExcel(buffer) {
 module.exports = function(buffer) {
   const list = parseQuestionExcel(buffer);
   const reportData = reportAnalysis(list);
+  console.log('交易流水数：' + reportData.count);
   console.log('买入总金额：' + reportData.buy);
   console.log('卖出总金额：' + reportData.sellout);
   console.log('收支统计：' + (reportData.sellout - reportData.buy));
